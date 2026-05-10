@@ -1,7 +1,9 @@
 import { supabase } from '@/services/supabase';
 import { CoffeeShop } from '@/types';
-import React, { useEffect, useState } from 'react';
+import { router } from 'expo-router';
+import React, { useEffect, useState, } from 'react';
 import { Alert, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 export default function Home() {
   // สร้าง state เพื่อเก็บข้อมูลที่ดึงมาจาก supabase
   // และนำไปใช้กับ Component ที่จะเอาข้อมมูลไปแสดงบนหน้าจอ
@@ -26,7 +28,20 @@ export default function Home() {
 
 
   const showListShop = ({ item }: { item: CoffeeShop }) => (
-    <TouchableOpacity style={styles.cradListShop}>
+    <TouchableOpacity
+                    onPress={() => router.push({
+                      pathname: "/detail",
+                      params: {
+                        name: item.name,
+                        district: item.district,
+                        description: item.description,
+                        image_url: item.image_url,
+                        phone: item.phone,
+                        latitude: item.latitude,
+                        longitude: item.longtitude,
+                      },
+                    })}
+                    style={styles.cradListShop}>
       <Image source={{ uri: item.image_url }} style={{ width: 100, height: 100}} />
       <View style={{ flexDirection: 'column', marginLeft: 10 }}>
         <Text style={styles.txtSty1}>{item.name}</Text>
