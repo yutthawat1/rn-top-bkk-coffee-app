@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 export default function Detail() {
@@ -10,7 +10,7 @@ export default function Detail() {
 
 
   const handleCallPhone = () => {
-    Linking.openURL( `tel:${phone}`);
+    Linking.openURL(`tel:${phone}`);
   }
 
   //ฟังก์ชันเปิด GoogleMap/AppleMaps
@@ -44,12 +44,12 @@ export default function Detail() {
       <Text style={styles.districtSty}>{district}</Text>
       <Text style={styles.descriptionSty}>{description}</Text>
 
-      <TouchableOpacity style={styles.btnPhoneSty}>
-        <Text style={styles.phoneSty} onPress={handleCallPhone}>☎️ {phone}</Text>
+      <TouchableOpacity style={styles.btnPhoneSty} onPress={handleCallPhone}>
+        <Text style={styles.phoneSty}>☎️ {phone}</Text>
       </TouchableOpacity>
 
       <Text style={[styles.nameSty, { fontSize: 15 }]}>📍 แผนที่ร้าน</Text>
-          <MapView
+      <MapView
         style={{ height: 300, marginVertical: 20, marginHorizontal: 20 }}
         initialRegion={{
           longitude: parseFloat(longtitude as string),
@@ -65,6 +65,11 @@ export default function Detail() {
           }}
         />
       </MapView>
+
+      <TouchableOpacity style={styles.btnPhoneSty} onPress={handleOpenMap}>
+        <Text style={styles.phoneSty}>📍 แผนที่ร้าน</Text>
+      </TouchableOpacity>
+      <View style={{ height: 40 }} />
     </ScrollView>
   )
 }
