@@ -45,7 +45,7 @@ export default function Detail() {
       <Text style={styles.descriptionSty}>{description}</Text>
 
       <TouchableOpacity style={styles.btnPhoneSty}>
-        <Text  style={styles.phoneSty}>☎️ {phone}</Text>
+        <Text style={styles.phoneSty} onPress={handleCallPhone}>☎️ {phone}</Text>
       </TouchableOpacity>
 
       <Text style={[styles.nameSty, { fontSize: 15 }]}>📍 แผนที่ร้าน</Text>
