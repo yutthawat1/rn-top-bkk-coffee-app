@@ -118,6 +118,6 @@ const styles = StyleSheet.create({
   phoneSty: {
     fontFamily: "Kanit_400Regular",
     fontSize: 18,
-    color: "#fff",
+    color: "#ffffff",
   },
 })
