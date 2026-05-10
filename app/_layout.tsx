@@ -1,24 +1,39 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import { Kanit_400Regular, Kanit_700Bold } from "@expo-google-fonts/kanit";
+import { useFonts } from "expo-font";
+import { Stack, } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  // ------------------------load fonts------------------------------------------
+  const [fontsLoaded] = useFonts({
+    Kanit_400Regular,
+    Kanit_700Bold
+  });
 
+  useEffect(() => {
+    SplashScreen.preventAutoHideAsync();
+  }, []);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+// ________________________________________________________________________
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="home" options={{
+          title: "Top Bangkok Coffees",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#704214" },
+          headerTitleStyle: { color: "#ffffff", fontSize: 20, fontWeight: "bold" },
+        }} />
+        <Stack.Screen name="detail" options={{
+          title: "Coffee Detail",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#704214" },
+          headerTitleStyle: { color: "#ffffff", fontSize: 20, fontWeight: "bold" },
+        }} />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
   );
-}
+};
